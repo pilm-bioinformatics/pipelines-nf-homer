@@ -1,0 +1,8 @@
+name: homer-nf
+channels:
+  - defaults
+  - bioconda
+  - conda-forge
+dependencies:
+  # Default bismark
+  - homer
