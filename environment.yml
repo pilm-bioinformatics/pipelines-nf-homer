@@ -1,4 +1,4 @@
-name: homer-nf
+name: homer-nf-0.1
 channels:
   - defaults
   - bioconda
