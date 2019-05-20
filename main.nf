@@ -42,9 +42,13 @@ HOMER - N F   P I P E L I N E
  outdir     : ${params.outdir}
  """
 
+
 Channel
-    .fromFilePairs(params.deg, size: 1) { file -> file.getSimpleName() }
-    .set { deg_ch }
+    .fromPath(params.deg)
+    .map { file -> tuple(file.baseName, file)  }
+    .into {deg_ch; deg_info}
+
+deg_info.println()
 
 Channel
     .fromPath(params.bg)
@@ -57,7 +61,7 @@ process homer {
 
     input:
     set sample, file(deg) from deg_ch
-    file(bg) from bg_ch
+    file(bg) from bg_ch.collect()
 
     output:
     file(sample) into out_ch
